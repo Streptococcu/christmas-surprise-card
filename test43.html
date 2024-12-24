@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Surprise Card</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa; /* Light blue background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .card {
+            background: linear-gradient(145deg, #ffcccb, #ff6f61);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 2;
+            display: none;
+        }
+        .card.active {
+            display: block;
+        }
+        .card h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        /* Snow Effect */
+        .snow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall 10s linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-10px);
+                left: calc(100% * var(--x));
+            }
+            100% {
+                transform: translateY(100vh);
+                left: calc(100% * var(--x));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="snow">
+        <!-- Snowflakes will be added dynamically -->
+    </div>
+    <div class="card active" id="card0">
+        <h1>Special for you, click for ???</h1>
+    </div>
+    <div class="card" id="card1">
+        <h1>Surprise 🎉🥳</h1>
+    </div>
+    <div class="card" id="card2">
+        <h1>Merry Christmas!❄️</h1>
+    </div>
+    <div class="card" id="card3">
+        <h1>🎄✨🎁🎅</h1>
+    </div>
+    <div class="card" id="card4">
+        <h1>To ND😉</h1>
+    </div>
+    <div class="card" id="card7">
+        <h1>ขอให้เทศกาลคริสต์มาสปีนี้เป็นช่วงเวลาที่พิเศษมากๆสำหรับเธอนะ☃️</h1>
+    </div>
+    <div class="card" id="card8">
+        <h1>ขอให้เธอมีความสุขมากๆ😊</h1>
+    </div>
+    <div class="card" id="card9">
+        <h1>ขอให้ปีนี้ได้ของขวัญจากลุงซานต้าครอสเยอะๆ🎅😂</h1>
+    </div>
+    <div class="card" id="card10">
+        <h1>ขอให้ปีหน้าเราได้ใช้เวลาฉลองช่วงคริสต์มาสด้วยกันนะคั้บ😸</h1>
+    </div>
+    <!-- Move QR Code card to after "Content 10" -->
+    <div class="card" id="card5">
+        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://open.spotify.com/embed/track/6EIMUjQ7Q8Zr2VtIUik4He?utm_source=generator&size=200x200" alt="Spotify QR Code" />
+        </div>
+    </div>
+    <div class="card" id="card6">
+        <h1>From PP😎</h1>
+    </div>
+    <script>
+        const snowContainer = document.querySelector('.snow');
+        for (let i = 0; i < 100; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.setProperty('--x', Math.random());
+            snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            snowflake.style.animationDelay = `${Math.random() * 10}s`;
+            snowflake.style.opacity = Math.random();
+            snowContainer.appendChild(snowflake);
+        }
+
+        const cards = document.querySelectorAll('.card');
+        let currentCard = 0;
+
+        document.body.addEventListener('click', () => {
+            cards[currentCard].classList.remove('active');
+            currentCard = (currentCard + 1) % cards.length;
+            cards[currentCard].classList.add('active');
+        });
+    </script>
+</body>
+</html>
